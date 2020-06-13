@@ -1,6 +1,8 @@
 # gluaresty
 
 ```lua
+local resty = require("resty")
+
 local resp, err = resty.R()
     :SetQueryParams({key = "value"})
     :SetHeaders({key = "value"})
