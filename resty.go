@@ -7,12 +7,9 @@ import (
 )
 
 func Preload(L *lua.LState) {
-	L.PreloadModule("resty", func(L *lua.LState) int {
-		L.Push(luar.New(L, map[string]interface{}{
-			"R": resty.New().R,
-			"P": Parse,
-		}))
-		return 1
+	luar.PreloadModule(L, "resty", map[string]interface{}{
+		"R": resty.New().R,
+		"P": Parse,
 	})
 }
 
