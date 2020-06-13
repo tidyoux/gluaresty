@@ -7,10 +7,13 @@ import (
 )
 
 func Preload(L *lua.LState) {
-	L.SetGlobal("resty", luar.New(L, map[string]interface{}{
-		"R": resty.New().R,
-		"P": Parse,
-	}))
+	L.PreloadModule("resty", func(L *lua.LState) int {
+		L.Push(luar.New(L, map[string]interface{}{
+			"R": resty.New().R,
+			"P": Parse,
+		}))
+		return 1
+	})
 }
 
 type Response struct {
